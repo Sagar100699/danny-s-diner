@@ -63,9 +63,9 @@ VALUES
   
  ## --1. What is the total amount each customer spent at the restaurant?
    A-76,B-74,C-36
-   WITH  amount AS(SELECT sales.customer_id,sales.product_id,menu.price FROM sales INNER 
-   JOIN menu ON sales.product_id=menu.product_id)
-   select customer_id, SUM(price)as total FROM amount group by customer_id;
+   with  amount as(select sales.customer_id,sales.product_id,menu.price from sales inner 
+   join menu on sales.product_id=menu.product_id)
+   select customer_id, sum(price)as total from amount group by customer_id;
 
 
 ## --2. How many days has each customer visited the restaurant?
