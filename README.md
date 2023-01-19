@@ -59,13 +59,13 @@ VALUES
   ('B', '2021-01-09');
    
    
- ###  // Here I am Answering all the questions with sql queries as well.
+ ###   Here I am Answering all the questions with sql queries as well.
   
  ## --1. What is the total amount each customer spent at the restaurant?
-   A-76,B-74,C-36
-   with  amount as(select sales.customer_id,sales.product_id,menu.price from sales inner 
-   join menu on sales.product_id=menu.product_id)
-   select customer_id, sum(price)as total from amount group by customer_id;
+     A-76,B-74,C-36
+     with  amount as(select sales.customer_id,sales.product_id,menu.price from sales inner 
+     join menu on sales.product_id=menu.product_id)
+     select customer_id, sum(price)as total from amount group by customer_id;
 
 
 ## --2. How many days has each customer visited the restaurant?
@@ -92,23 +92,22 @@ VALUES
 
 
 ## -- 6. Which item was purchased first by the customer after they became a member?
-   A-3(Ramen),B-1(Sushi),C is not a member
-   
-  select sales.*,members.join_date from sales inner join members 
-  on sales.customer_id=members.customer_id where order_date>join_date group by customer_id ; 
+     A-3(Ramen),B-1(Sushi),C is not a member
+    select sales.*,members.join_date from sales inner join members 
+    on sales.customer_id=members.customer_id where order_date>join_date group by customer_id ; 
 
 ## -- 7. Which item was purchased just before the customer became a member?
 
 
 ## -- 8. What is the total items and amount spent for each member before they became a member?
-  A-25,B-40,C-36 (amount spent)
-  A-2,B-3,C-3 (Total items )  // All before becoming a member.
-  with sales_before_becoming_member as(  select sales.*,members.join_date from sales left join members 
-  on sales.customer_id=members.customer_id where (order_date<join_date) or(join_date is null)) 
-  select sales_before_becoming_member.customer_id,sum(menu.price)as amount_spent,
-  count(sales_before_becoming_member.customer_id)  as total_items
-  from sales_before_becoming_member inner join menu
-  on sales_before_becoming_member.product_id=menu.product_id group by customer_id;
+     A-25,B-40,C-36 (amount spent)
+     A-2,B-3,C-3 (Total items )  // All before becoming a member.
+     with sales_before_becoming_member as(  select sales.*,members.join_date from sales left join members 
+     on sales.customer_id=members.customer_id where (order_date<join_date) or(join_date is null)) 
+     select sales_before_becoming_member.customer_id,sum(menu.price)as amount_spent,
+     count(sales_before_becoming_member.customer_id)  as total_items
+     from sales_before_becoming_member inner join menu
+     on sales_before_becoming_member.product_id=menu.product_id group by customer_id;
 
 
 ## -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
@@ -116,15 +115,14 @@ VALUES
      with new_price_table as(select sales.*,menu.product_name,menu.price 
       ,case when product_name='sushi' then 20*(price)
                else 10*(price) end as new_price
-  from sales inner join menu 
-  on sales.product_id=menu.product_id) select customer_id,sum(new_price) as total_points from new_price_table group by customer_id;
+     from sales inner join menu 
+     on sales.product_id=menu.product_id) select customer_id,sum(new_price) as total_points from new_price_table group by customer_id;
   
 
 ## -- 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
-    A-8 points, B-4 points 
-    A purchased 4 times after becoming a member.//2*4=8//
-    B purchased 2 times after becoming a member.//2*2=4//
- 
-  select sales.*,members.join_date,2*count(product_id) as points from sales inner join members 
-  on sales.customer_id=members.customer_id where (order_date>=join_date) and (month(order_date)=1)  group by customer_id;
-  
+     A-8 points, B-4 points 
+     A purchased 4 times after becoming a member.//2*4=8//
+     B purchased 2 times after becoming a member.//2*2=4//
+     select sales.*,members.join_date,2*count(product_id) as points from sales inner join members 
+     on sales.customer_id=members.customer_id where (order_date>=join_date) and (month(order_date)=1)  group by customer_id;
+    
