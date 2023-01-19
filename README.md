@@ -1,4 +1,5 @@
-####### danny-s-diner
+
+######  danny-s-diner
 ##### It is one of the case studies from the website 8weekssqlchallenge.com . In this I had answered all the questions using SQL . With all the answers in the form of queries.
 
 
@@ -71,22 +72,22 @@ VALUES
    A-4Days,B-6Days,C-2Days
    select count(distinct order_date) as Visited_days ,customer_id from sales group by customer_id ;
 
-##-- 3. What was the first item from the menu purchased by each customer?
+## -- 3. What was the first item from the menu purchased by each customer?
     A-Sushi,B-Curry,C-Ramen
     select sales.*,menu.product_name from sales inner join menu on
     sales.product_id=menu.product_id group by customer_id having min(order_date) order by customer_id;
 
-##-- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+## -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
      most purchased item was Ramen.it was purchased 8 times.
      A-3times,B-2times,C-3times
      
      select sales.product_id,count(sales.product_id)as count,menu.product_name  from sales 
      inner join menu
-     on sales.product_id=menu.product_id group by product_id order by count desc;   //most purchased item is Ramen.//
+     on sales.product_id=menu.product_id group by product_id order by count desc;   //most purchased item is Ramen
      
-      select count( product_id) ,customer_id,product_id from sales where product_id=3 group by customer_id; // A-3times,B-2times,C-3times//
+      select count( product_id) ,customer_id,product_id from sales where product_id=3 group by customer_id; // A-3times,B-2times,C-3times
        
-##-- 5. Which item was the most popular for each customer?
+## -- 5. Which item was the most popular for each customer?
      
 
 
