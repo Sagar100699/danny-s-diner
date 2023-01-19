@@ -59,18 +59,18 @@ VALUES
   ('B', '2021-01-09');
    
    
- ###  // Here I am Answering all the questions with sql queries as well.//
+ ###  // Here I am Answering all the questions with sql queries as well.
   
  ## --1. What is the total amount each customer spent at the restaurant?
-  A-76,B-74,C-36
-  WITH  amount AS(SELECT sales.customer_id,sales.product_id,menu.price FROM sales INNER 
-  JOIN menu ON sales.product_id=menu.product_id)
-  select customer_id, SUM(price)as total FROM amount group by customer_id;
+   A-76,B-74,C-36
+   WITH  amount AS(SELECT sales.customer_id,sales.product_id,menu.price FROM sales INNER 
+   JOIN menu ON sales.product_id=menu.product_id)
+   select customer_id, SUM(price)as total FROM amount group by customer_id;
 
 
 ## --2. How many days has each customer visited the restaurant?
-   A-4Days,B-6Days,C-2Days
-   select count(distinct order_date) as Visited_days ,customer_id from sales group by customer_id ;
+    A-4Days,B-6Days,C-2Days
+    select count(distinct order_date) as Visited_days ,customer_id from sales group by customer_id ;
 
 ## -- 3. What was the first item from the menu purchased by each customer?
     A-Sushi,B-Curry,C-Ramen
